@@ -68,13 +68,14 @@ async def update_channel_status():
             current_icon_url = icon_url
 
             icon_response = requests.get(icon_url)
+            resized = BytesIO()
             with Image.open(BytesIO(icon_response.content)) as img:
                 img = img.resize((1028, 1028), Image.LANCZOS)
                 img = img.convert("RGB")
-                img.save("game_icon.jpg", format="JPEG")
+                img.save(resized, format="JPEG")
 
             await bot.edit_message_text(CHANNEL, MESSAGE_ID, game.name)
-            await bot.set_chat_photo(CHANNEL, photo="game_icon.jpg")
+            await bot.set_chat_photo(CHANNEL, photo=resized)
 
             await delete_last_message()
 
