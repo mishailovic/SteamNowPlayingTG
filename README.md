@@ -13,3 +13,6 @@ pip3 install -r requirements.txt
 ```
 python3 main.py
 ```
+
+
+Inspired by https://github.com/altfoxie/playing-tg-bio
